@@ -1,0 +1,98 @@
+[user]
+  name = YOUR NAME HERE
+  email = YOUR EMAIL HERE
+
+
+[github]
+  user = YOUR_GITHUB_USER_HERE
+
+
+[core]
+  autocrlf = input
+  safecrlf = false
+  excludesfile = ~/.gitignore
+  editor = code
+  ignorecase = false
+  whitespace = trailing-space,space-before-tab
+
+
+[alias]
+  # General tools
+  co = checkout
+  br = branch
+  brall = branch -avv
+  st = status -s
+
+
+  ### Logs
+  lg = log --graph --pretty=format:\"%Cred%h%Creset - %C(yellow)%an%Creset - %s %Cblue%d%Creset %Cgreen(%cr)%Creset\" --abbrev-commit
+  lgall = log --graph --pretty=format:\"%Cred%h%Creset - %C(yellow)%an%Creset - %s %Cblue%d%Creset %Cgreen(%cr)%Creset\" --abbrev-commit --branches  # Note: shows all branches, but doesn't include tags.
+
+  last = log -1 --name-status  # Show the latest commit message and files
+  lastd = log -1 -p   # Show the latest commit and a full diff. Note: the -p shows a full patch.
+
+  # Show logs only for the current directory (or just use git lg <dir>)
+  ld = log --graph --pretty=format:\"%Cred%h%Creset - %C(yellow)%an%Creset - %s %Cgreen(%cr)%Creset\" --abbrev-commit .
+
+
+  ### Diffing
+  diffc = diff --cached
+  dt = !sh -c 'git difftool --dir-diff &' -
+  dtc = !sh -c 'git difftool --cached --dir-diff &' -
+
+  # Diff historical commits
+  showdiff = !sh -c 'git difftool $1^..$1 --dir-diff &' -
+
+  # Diff between two commits, e.g. master~5 master (note that this omits the ..)
+  showdiffbetween = !sh -c 'git difftool $1..$2 --dir-diff &' -
+
+  # Show message and files for a commit
+  smf = show --name-status
+
+  ### Other tools
+  # Show all git aliases
+  alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ = \\2/' | sort
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+
+
+  ### Tools
+
+  # Safely update from the upstream branch (usually a remote branch).
+  pr = pull --rebase
+
+
+[color]
+  ui = true
+
+[mergetool]
+  keepBackup = true
+
+[difftool "bc4mergetest"]
+  cmd = /usr/local/bin/bcompare $LOCAL $REMOTE
+
+[diff]
+  tool = bcomp
+  # Use mnemonic prefixes (i=index, w=work tree, c=commit, o=object) instead of the standard a and b notation:
+	mnemonicprefix = true
+
+[difftool]
+  prompt = false
+
+[difftool "bcomp"]
+  keepBackup = true
+  trustExitCode = true
+  cmd = "/usr/local/bin/bcomp" "$LOCAL" "$REMOTE"
+
+[log]
+  # This will default dates to local time unless overridden on the command line or by the repo.
+  date = local
+
+[push]
+  default = simple
+
+[merge]
+  tool = bc3
+
+[branch]
+  # When branching off a remote branch, automatically let the local branch track the remote branch:
+  autosetupmerge = true
