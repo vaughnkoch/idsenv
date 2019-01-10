@@ -26,6 +26,8 @@ xcode-select --install
 
 
 ### Install core tools
+
+Now that you have brew installed, you can use it to install all kinds of useful command line tools.
 ```
 brew install python git bash-completion
 ```
