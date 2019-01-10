@@ -24,10 +24,11 @@ If you can't get xcode command line tools installed, try this:
 xcode-select --install
 ```
 
+Now that you have brew installed, you can use it to install all kinds of useful command line tools.  Here's a list of the most popular packages: https://formulae.brew.sh/analytics/install/365d/
+
 
 ### Install core tools
 
-Now that you have brew installed, you can use it to install all kinds of useful command line tools.
 ```
 brew install python git bash-completion
 ```
