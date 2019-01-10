@@ -48,23 +48,24 @@ Very useful tools:
 
 ```
 brew install httpie ack tree fortune cowsay figlet lolcat
- 
+
 # Try out a few:
+ack some-string-here   # Better than grep
+http google.com   # Easier curl
 fortune | cowsay | lolcat
 fortune | figlet | lolcat
 ```
 
 ### If you're on Windows
 
-Honestly, data science and open source engineering is WAY easier on a Mac.
-However, you should install Python from python.org, and install git from https://git-scm.com/download/win.
+Honestly, data science and open source engineering is WAY easier on a Mac. However, you should install Python from python.org, and install git from https://git-scm.com/download/win.
 
 
 ## Chapter 2: Python
 
 Talk: What is a virtualenv and why should I use one?
 
-Install Python and virtualenv
+### Check Python version and install virtualenv
 
 ```
 python --version  # This should be 3.x, preferably 3.7
@@ -120,28 +121,33 @@ Talk:
   - Switching between branches/commits and what happens to your files
 
 
-Create github account
+Create your github account, if you don't have one already:
+
 https://github.com/join
+
 
 ### Create and add ssh keys to github
 This is so you can upload via ssh.
+
 https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 
 ```
-# Create ssh key
+# Create ssh key - use a passphrase instead of bare
+# You can add the passphrase to MacOS so you don't have to re-enter it.
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 cat ~/.ssh/id_rsa.pub | pbcopy   # This will copy your public key into your OS copy/paste buffer.
 ```
 
 
-Then follow the instructions here to add it to your github account.
+Then follow the instructions here to add it to your github account:
+
 https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
 
 
 ### Clone the IDSEnv repo (this repo)
 
-New git command: clone
+New git command: `git clone`
 
 ```
 # Get the IDSEnv repo
@@ -149,12 +155,13 @@ mkdir ~/src
 cd ~/src
 
 # Get the idsenv repo and put it in ~/src/idsenv
-git clone https://github.com/vaughnkoch/idsenv
+# If this fails, you need to fix your .ssh key setup.
+git clone git@github.com:vaughnkoch/idsenv.git
 ```
 
 
 
-### Create your own dotfiles repo. New command: git init
+### Create your own dotfiles repo.
 
 Talk: What are dotfiles and why should I use them?
 
