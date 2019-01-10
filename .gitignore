@@ -1,0 +1,9 @@
+# This file tells Git not to track these files, so you
+# can have them in your repo without committing them.
+
+.DS_Store
+*.pyc
+
+# VSCode
+*.code-workspace
+.vscode/
