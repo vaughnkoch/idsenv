@@ -169,14 +169,13 @@ New git commands:
 
 ```
 git add <file>     # Add a file
-git add <dir>      # Ad
-git add -p
-git commit -m "Some message"
-git push origin master
+git add <dir>      # Add a whole directory
+git add -p         # Selectively add parts of a file
+git commit -m "Some message"    # Commit your code
+git push origin master   # Push your changes to Github
 ```
 
-On Github, at the top right, there's a + icon. Click that and choose 'New repository'.
-Use 'dotfiles' as the name. Make it private. Don't add a readme or anything else. Click 'Create Repository'.
+On Github, at the top right, there's a + icon. Click that and choose 'New repository'. Use 'dotfiles' as the name. Make it private. Don't add a readme or anything else. Click 'Create Repository'.
 
 When that's done, we're going to create the dotfiles repo locally and push it to github. In Terminal:
 
@@ -187,11 +186,17 @@ cd ~/src/dotfiles
 
 # Create the repo, add a file, and push it to Github.
 # Remember to replace 'YOUR_USERNAME_HERE' with your Github username!
+
+# Initialize Git and create a file
 git init
-touch readme.md
-git remote add origin git@github.com:YOUR_USERNAME_HERE/dotfiles.git
+echo "This is MY readme." > readme.md
+
+# Add the file to Git
 git add readme.md
 git commit -m "Added readme"
+
+# Add Github as the origin and push your code
+git remote add origin git@github.com:YOUR_USERNAME_HERE/dotfiles.git
 git push -u origin master
 ```
 
@@ -219,8 +224,13 @@ But, we want to do that so any changes to your dotfiles repo is autosaved to tho
 # Create symlinks from your repo to your home directory
 # This activates these config files
 # If you already have these files, these commands won't overwrite them. You should then do a manual merge by editing them.
-ln -s ~/dotfiles/bash_profile ~/.bash_profile
-ln -s ~/dotfiles/bashrc ~/.bashrc
+
+# Bash
+ln -s ~/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+
+# Git
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/dotfiles/.gitignore ~/.gitignore
 ```
@@ -302,4 +312,4 @@ git rebase -i      # Reshape your commits before you push then
 
 ### What's next?
 
-The free online book Pro Git (https://git-scm.com/book/en/v2) is a really great way to understand Git fundamentals. If you're confused, start here.
+The free online book Pro Git (https://git-scm.com/book/en/v2) is a really great way to understand Git fundamentals.
