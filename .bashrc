@@ -83,3 +83,6 @@ if [ -f $VIRTUALENVWRAPPER_LOCATION ]; then
   source $VIRTUALENVWRAPPER_LOCATION
 fi
 
+# Visual Studio Code
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
