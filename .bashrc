@@ -44,10 +44,10 @@ bind '"\t":menu-complete'
 
 # Case insensitive filenames for globbing.
 # example: ls A* will show a* files as well.
-shopt -s nocaseglob
+# shopt -s nocaseglob
 
 # Allow ** in globs for recursive globbing
-shopt -s globstar
+# shopt -s globstar
 
 # Case insensitive filenames for tab completion.
 bind 'set completion-ignore-case on'
@@ -57,7 +57,7 @@ bind 'set completion-ignore-case on'
 # This is super helpful to know what virtualenv you're in, what git branch you're on,
 # and what directory you're in.
 # sarah (myvenv) git:master ~/src/myproject $
-source ~/dotfiles/ps1.bash
+source ~/src/dotfiles/.ps1.bash
 
 
 ###
@@ -69,6 +69,10 @@ export PYTHONBREAKPOINT='ipdb.set_trace'
 
 
 ### Switches based on local environment.
+
+# Replace these with the right paths to your virtualenvwrapper.sh and the python running alongside it.
+# You may be able to find that with this command:
+# which virtualenvwrapper.sh
 export VIRTUALENVWRAPPER_LOCATION=/usr/local/bin/virtualenvwrapper.sh
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export WORKON_HOME=~/Envs

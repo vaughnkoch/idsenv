@@ -77,7 +77,7 @@ pip install ipython ipdb
 pip install virtualenv virtualenvwrapper
 
 # Create the virtualenv - you should do this for every project.
-mkvirtualenv myproject
+mkvirtualenv myenv
 ```
 
 ### Working with virtualenv
@@ -85,7 +85,7 @@ mkvirtualenv myproject
 Your virtualenv is a silo that holds all your python packages. You have to activate it with `workon your_env_here` before running your Python code. It helps you eliminate version conflicts between projects.
 
 ```
-workon your_env_here  # Enter the env
+workon myenv  # Enter the env
 deactivate  # Exit the env - rarely needed though
 cdsitepackages  # Go to the directory containing your installed packages. Note: no space
 cdproject  # Go to your source root folder where you created the venv. Note: no space
@@ -207,7 +207,14 @@ You just created and pushed the first file of your repo. Now we're going to add 
 
 ```
 # Copy some useful files over and add them to your repo
-cp ~/env/idsenv/.*  .  # Get all dotfiles, e.g. ".gitconfig" and copy them here.
+cd ~/src/dotfiles
+# Get all dotfiles, e.g. ".gitconfig" and copy them here.
+cp ~/src/idsenv/.bash* .
+cp ~/src/idsenv/.gitconfig .
+cp ~/src/idsenv/.gitignore .
+cp ~/src/idsenv/.ps1.bash .
+
+
 
 # Add all the files, commit them, and push to Github.
 git add .
@@ -229,13 +236,13 @@ But, we want to do that so any changes to your dotfiles repo is autosaved to tho
 # If you already have these files, these commands won't overwrite them. You should then do a manual merge by editing them.
 
 # Bash
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
-ln -s ~/dotfiles/.bashrc ~/.bashrc
+ln -s ~/src/dotfiles/.bash_profile ~/.bash_profile
+ln -s ~/src/dotfiles/.bash_aliases ~/.bash_aliases
+ln -s ~/src/dotfiles/.bashrc ~/.bashrc
 
 # Git
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.gitignore ~/.gitignore
+ln -s ~/src/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/src/dotfiles/.gitignore ~/.gitignore
 ```
 
 
