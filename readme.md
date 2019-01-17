@@ -1,6 +1,6 @@
 # Insight Data Science Tech Talk
 
-This is a repo to help IDS Seattle Fellows set up their development environment.
+This is a repo to help IDS Fellows set up their development environment.
 
 ### Goals
 - Set up your dev environment
@@ -77,7 +77,7 @@ pip install ipython ipdb
 pip install virtualenv virtualenvwrapper
 
 # Create the virtualenv - you should do this for every project.
-mkvirtualenv myenv
+mkvirtualenv your_env_here
 ```
 
 ### Working with virtualenv
@@ -85,11 +85,34 @@ mkvirtualenv myenv
 Your virtualenv is a silo that holds all your python packages. You have to activate it with `workon your_env_here` before running your Python code. It helps you eliminate version conflicts between projects.
 
 ```
-workon myenv  # Enter the env
+workon your_env_here  # Enter the env
 deactivate  # Exit the env - rarely needed though
 cdsitepackages  # Go to the directory containing your installed packages. Note: no space
 cdproject  # Go to your source root folder where you created the venv. Note: no space
 ```
+
+If you have trouble using mkvirtualenv, you can create a virtualenv with conda like this:
+
+```
+conda create -n mynewenv python=3.7
+source activate mynewenv
+
+# If you want to exit
+deactivate
+```
+
+
+or with bare virtualenv like this:
+
+```
+pip install virtualenv
+virtualenv ~/Envs/mynewenv
+source ~/Envs/mynewenv/bin/activate
+
+# If you want to exit
+deactivate
+```
+
 
 ### Optional: Jupyter, NBExtensions & Theming
 
@@ -166,7 +189,10 @@ git clone git@github.com:vaughnkoch/idsenv.git
 
 ### Create your own dotfiles repo.
 
-Talk: What are dotfiles and why should I use them?
+Dotfiles is a technique anyone can use to have a permanent record of any configs/settings you have for your machine, project, tools, or anything. All you need to do is put your configs into a Git repo and maintain it on Github. 
+
+The idea is that once you've taken pains to get your setup correct, you never want to have to do that again. So we're going to create a Git repo for those settings and setup your machine to use them. When you get a new machine, you'll have all your settings - you just need to reconnect them to the new machine.
+
 
 New git commands:
 
@@ -187,6 +213,10 @@ When that's done, we're going to create the dotfiles repo locally and push it to
 mkdir ~/src/dotfiles
 cd ~/src/dotfiles
 
+# Optional: to remove a corrupted git repo completely, if one's already there
+# This will not remove any of your dotfiles, just the Git database.
+rm -rf .git
+
 # Create the repo, add a file, and push it to Github.
 # Remember to replace 'YOUR_USERNAME_HERE' with your Github username!
 
@@ -203,7 +233,7 @@ git remote add origin git@github.com:YOUR_USERNAME_HERE/dotfiles.git
 git push -u origin master
 ```
 
-You just created and pushed the first file of your repo. Now we're going to add your dotfiles and push those too.
+You just created and pushed the first file of your repo. Now we're going to add your dotfiles.
 
 ```
 # Copy some useful files over and add them to your repo
@@ -213,13 +243,6 @@ cp ~/src/idsenv/.bash* .
 cp ~/src/idsenv/.gitconfig .
 cp ~/src/idsenv/.gitignore .
 cp ~/src/idsenv/.ps1.bash .
-
-
-
-# Add all the files, commit them, and push to Github.
-git add .
-git commit -m "Added some files"
-git push -u origin master
 ```
 
 Now refresh your browser in the repo you created. You should see the new dotfiles you added.
@@ -231,20 +254,41 @@ In order to use your dotfiles, we have to add them to your home directory.
 But, we want to do that so any changes to your dotfiles repo is autosaved to those files. We do that with symlinks.
 
 ```
+# Backup your existing bash configs
+mv ~/.bash_profile ~/.bash_profile.old
+mv ~/.bashrc ~/.bashrc.old
+mv ~/.bash_aliases ~/.bash_aliases.old
+
 # Create symlinks from your repo to your home directory
-# This activates these config files
-# If you already have these files, these commands won't overwrite them. You should then do a manual merge by editing them.
+# This activates these config files.
 
 # Bash
 ln -s ~/src/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/src/dotfiles/.bash_aliases ~/.bash_aliases
 ln -s ~/src/dotfiles/.bashrc ~/.bashrc
+ln -s ~/src/dotfiles/.bash_aliases ~/.bash_aliases
 
 # Git
 ln -s ~/src/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/src/dotfiles/.gitignore ~/.gitignore
 ```
 
+
+### Make VSCode usable from the command line
+
+In VSCode, hit Shift-Cmd-P (on a Mac) to open the Command Palette. Type in 'shell command' and pick:
+Shell Command: Install 'code' command in PATH.
+
+Open a new Terminal. You should be able to do `code ~/.bashrc` to open a file in VSCode from Terminal.
+
+
+### Restore any configs
+
+Open your *.old files with vscode and manually move over anything you need to your new dotfiles repo.
+Be careful of any duplicated directives.
+
+```
+code ~/*.old
+```
 
 ### Change the name and email in your .gitconfig
 
@@ -317,6 +361,18 @@ git stash show stash@{0} -p  # Show a specific stash
 
 # Rebasing
 git rebase -i      # Reshape your commits before you push then
+```
+
+
+### Final commit to Github
+
+Go back to your dotfiles repo, commit and push your changes to Github.
+
+```
+cd ~/src/dotfiles
+git add .
+git commit -m "Updated dotfiles"
+git push -u origin master
 ```
 
 
